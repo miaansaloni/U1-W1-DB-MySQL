@@ -14,15 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute([$name, $surname, $age, $email]);
 }
 
-// SELECT DI TUTTE LE RIGHE
-$stmt = $pdo->query('SELECT * FROM users');
-
-$search = $GET['search'] ?? '';
-$stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ?");
-$stmt->execute([
-    "%$search%"
-]);
-
+// SELECT DI TUTTE LE RIGHE O DI RIGHE FILTRATE PER RICERCA
+if (isset($_GET['search'])){
+    $search = $_GET['search'];
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE name LIKE ?");
+    $stmt->execute(["%$search%"]);
+}else{
+    $stmt = $pdo->query('SELECT * FROM users');
+}
 
 include __DIR__ . '/includes/init.php'; ?>
 
