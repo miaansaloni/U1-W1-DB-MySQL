@@ -66,8 +66,8 @@ include __DIR__ . '/includes/init.php'; ?>
     </ul>
 
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
+<nav>
+    <ul class="pagination justify-content-center">
         <?php for ($i = 1; $i <= $totalPages; $i++) {?>
             <li class="page-item <?= $i === $current_page ? 'active' : '' ?>">
                 <a class="page-link" href="?page=<?= $i ?><?= isset($_GET['search']) ? '&search=' . $_GET['search'] : '' ?>"><?= $i ?></a>
